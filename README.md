@@ -5,4 +5,4 @@
 2. Opening the repo in Visual Studios gave an option to install packages necessary
 
 ## How it looks currently
-![](/simulator_screenshot.png.png?raw=true)
+![](/simulator_screenshot.png?raw=true)
