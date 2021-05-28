@@ -13,9 +13,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Welcome to Flutter',
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('Welcome to Flutter'),
-        ),
         body: Center(
           child: FreeTime(),
         ),
@@ -30,8 +27,19 @@ class FreeTime extends StatefulWidget {
   _FreeTimeState createState() => _FreeTimeState();
 }
 
-String freeTimeChoice = 'meditate';
-final activitiesList = ['meditate', 'make coffee', 'quuick lap round Vic Park'];
+final activitiesList = [
+  'Meditate', 
+  'Make Coffee', 
+  'Quuick Lap Round Vic Park',
+  'Pulse Breath Work',
+  'Stomach Massage Breath Work',
+  'Box Breath Work',
+];
+String freeTimeChoice = activitiesList[0];
+
+Color hexToColor(String code) {
+  return new Color(int.parse(code.substring(1, 7), radix: 16) + 0xFF000000);
+}
 
 class _FreeTimeState extends State<FreeTime> {
   @override
@@ -39,7 +47,11 @@ class _FreeTimeState extends State<FreeTime> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        Text(freeTimeChoice),
+        Text(
+          freeTimeChoice,
+          style: TextStyle(color: hexToColor("#f2a03d"), fontSize: 25.0)
+        ),
+        Padding(padding: EdgeInsets.only(top: 100.0)),
         IconButton(
           icon: const Icon(Icons.offline_bolt_rounded),
           iconSize: 100,
@@ -47,7 +59,8 @@ class _FreeTimeState extends State<FreeTime> {
           onPressed: () {
             setState(() {
               Random rnd = new Random();
-              freeTimeChoice = activitiesList[rnd.nextInt(3)];
+              print(activitiesList.length);
+              freeTimeChoice = activitiesList[rnd.nextInt(activitiesList.length)];
             });
           },
         ),
