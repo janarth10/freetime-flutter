@@ -30,11 +30,28 @@ class FreeTime extends StatefulWidget {
   _FreeTimeState createState() => _FreeTimeState();
 }
 
+String freeTimeChoice = 'meditate';
+final activitiesList = ['meditate', 'make coffee', 'quuick lap round Vic Park'];
+
 class _FreeTimeState extends State<FreeTime> {
   @override
   Widget build(BuildContext context) {
-    final activities_list = ['meditate', 'make coffee', 'quuick lap round Vic Park'];
-    Random rnd = new Random();
-    return Text(activities_list[rnd.nextInt(3)]);
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Text(freeTimeChoice),
+        IconButton(
+          icon: const Icon(Icons.offline_bolt_rounded),
+          iconSize: 100,
+          tooltip: "Freetime Flutter Lottery!",
+          onPressed: () {
+            setState(() {
+              Random rnd = new Random();
+              freeTimeChoice = activitiesList[rnd.nextInt(3)];
+            });
+          },
+        ),
+      ],
+    );
   }
 }
