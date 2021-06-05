@@ -35,7 +35,20 @@ final activitiesList = [
   'Stomach Massage Breath Work',
   'Box Breath Work',
 ];
+final fontFamilies = [
+  'CabinSketch',
+  'Playball',
+  'CinzelDecorative',
+  'LobsterTwo',
+  'Monoton',
+  'MountainsofChristmas',
+  'PressStart2p',
+  'YeonSung',
+  'ZCOOLKuaiLe',
+];
+
 String freeTimeChoice = activitiesList[0];
+String randomFontFamily = fontFamilies[0];
 
 Color hexToColor(String code) {
   return new Color(int.parse(code.substring(1, 7), radix: 16) + 0xFF000000);
@@ -49,7 +62,11 @@ class _FreeTimeState extends State<FreeTime> {
       children: <Widget>[
         Text(
           freeTimeChoice,
-          style: TextStyle(color: hexToColor("#f2a03d"), fontSize: 25.0)
+          style: TextStyle(
+            color: hexToColor("#f2a03d"), 
+            fontSize: 45.0,
+            fontFamily: randomFontFamily
+          )
         ),
         Padding(padding: EdgeInsets.only(top: 100.0)),
         IconButton(
@@ -59,8 +76,12 @@ class _FreeTimeState extends State<FreeTime> {
           onPressed: () {
             setState(() {
               Random rnd = new Random();
-              print(activitiesList.length);
+
               freeTimeChoice = activitiesList[rnd.nextInt(activitiesList.length)];
+              randomFontFamily = fontFamilies[rnd.nextInt(fontFamilies.length)];
+
+              print(freeTimeChoice);
+              print(randomFontFamily);
             });
           },
         ),
