@@ -53,21 +53,21 @@ Color hexToColor(String code) {
 
 class SpareTimeActivity {
   const SpareTimeActivity({
-    @required this.activityName,
+    @required this.name,
     @required this.fontFamily,
-    // @required this.activityColorCode,
+    this.colorCode = "#f2a03d",
     // @required this.iconName,
   });
 
-  final String activityName;
+  final String name;
   final String fontFamily;
-  // final String activityColorCode;
+  final String colorCode;
   // final String iconName;
 
 }
 
 // TODO: Won't need this until I implement the scrollable list view
-// List<SpareTimeActivity> getActivities() => activitiesList.map((x) => SpareTimeActivity(activityName: x)).toList();
+// List<SpareTimeActivity> getActivities() => activitiesList.map((x) => SpareTimeActivity(name: x)).toList();
 
 class SpareTimeCard extends StatelessWidget {
   const SpareTimeCard({@required this.activity});
@@ -75,12 +75,25 @@ class SpareTimeCard extends StatelessWidget {
   final SpareTimeActivity activity;
 
   Widget build(BuildContext context){
-    return Text(
-      activity.activityName,
-      style: TextStyle(
-        color: hexToColor("#f2a03d"), 
-        fontSize: 45.0,
-        fontFamily: activity.fontFamily
+    return Padding(padding: const EdgeInsets.all(20),
+      child: SizedBox(
+        height: 300,
+        width: 400,
+        child: Card(
+          elevation: 8,
+          shadowColor: hexToColor(activity.colorCode),
+          child: Padding(
+            padding: const EdgeInsets.all(20), 
+            child: Text(
+              activity.name,
+              style: TextStyle(
+                color: hexToColor(activity.colorCode), 
+                fontSize: 45.0,
+                fontFamily: activity.fontFamily
+              )
+            )
+          )
+        )
       )
     );
   }
@@ -97,7 +110,7 @@ class _FreeTimeState extends State<FreeTime> {
       children: <Widget>[
         SpareTimeCard(
           activity: SpareTimeActivity(
-              activityName: freeTimeChoice,
+              name: freeTimeChoice,
               fontFamily: randomFontFamily,
             )
         ),
