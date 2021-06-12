@@ -47,26 +47,72 @@ final fontFamilies = [
   'ZCOOLKuaiLe',
 ];
 
-String freeTimeChoice = activitiesList[0];
-String randomFontFamily = fontFamilies[0];
-
 Color hexToColor(String code) {
   return new Color(int.parse(code.substring(1, 7), radix: 16) + 0xFF000000);
 }
 
+class SpareTimeActivity {
+  const SpareTimeActivity({
+    @required this.name,
+    @required this.fontFamily,
+    this.colorCode = "#f2a03d",
+    // @required this.iconName,
+  });
+
+  final String name;
+  final String fontFamily;
+  final String colorCode;
+  // final String iconName;
+
+}
+
+// TODO: Won't need this until I implement the scrollable list view
+// List<SpareTimeActivity> getActivities() => activitiesList.map((x) => SpareTimeActivity(name: x)).toList();
+
+class SpareTimeCard extends StatelessWidget {
+  const SpareTimeCard({@required this.activity});
+  
+  final SpareTimeActivity activity;
+
+  Widget build(BuildContext context){
+    return Padding(padding: const EdgeInsets.all(20),
+      child: SizedBox(
+        height: 300,
+        width: 400,
+        child: Card(
+          elevation: 8,
+          shadowColor: hexToColor(activity.colorCode),
+          child: Padding(
+            padding: const EdgeInsets.all(20), 
+            child: Text(
+              activity.name,
+              style: TextStyle(
+                color: hexToColor(activity.colorCode), 
+                fontSize: 45.0,
+                fontFamily: activity.fontFamily
+              )
+            )
+          )
+        )
+      )
+    );
+  }
+}
+
 class _FreeTimeState extends State<FreeTime> {
+  String freeTimeChoice = activitiesList[0];
+  String randomFontFamily = fontFamilies[0];
+
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        Text(
-          freeTimeChoice,
-          style: TextStyle(
-            color: hexToColor("#f2a03d"), 
-            fontSize: 45.0,
-            fontFamily: randomFontFamily
-          )
+        SpareTimeCard(
+          activity: SpareTimeActivity(
+              name: freeTimeChoice,
+              fontFamily: randomFontFamily,
+            )
         ),
         Padding(padding: EdgeInsets.only(top: 100.0)),
         IconButton(
