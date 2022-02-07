@@ -4,7 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'dart:math';
-
+// import 'package:drawing_animation/drawing_animation.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -91,13 +91,21 @@ class SpareTimeCard extends StatelessWidget {
           shadowColor: hexToColor(activity.colorCode),
           child: Padding(
             padding: const EdgeInsets.all(20), 
-            child: Text(
-              activity.name,
-              style: TextStyle(
-                color: hexToColor(activity.colorCode), 
-                fontSize: 45.0,
-                fontFamily: activity.fontFamily
-              )
+            // child: Text(
+            //   activity.name,
+            //   style: TextStyle(
+            //     color: hexToColor(activity.colorCode), 
+            //     fontSize: 45.0,
+            //     fontFamily: activity.fontFamily
+            //   )
+            // )
+            child: AnimatedDrawing.svg(
+              "assets/my_drawing.svg",
+              // run: this.run,
+              duration: new Duration(seconds: 3),
+              // onFinish: () => setState(() {
+              //   this.run  = false;
+              // }),
             )
           )
         )
